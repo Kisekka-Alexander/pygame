@@ -21,6 +21,11 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._update_events()
+
+            # Get rid of bullets that have disappeared.
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
             
     def _check_events(self):
             for event in pygame.event.get():
@@ -31,8 +36,6 @@ class AlienInvasion:
 
                 elif event.type == pygame.KEYUP:
                     self._check_keyup_events(event)
-                elif event.key == pygame.K_SPACE:
-                    self._fire_bullet()
 
     def _check_keydown_events(self,event):
             if event.key == pygame.K_RIGHT:
@@ -41,6 +44,8 @@ class AlienInvasion:
                 self.ship.moving_left = True
             if event.key == pygame.K_q:
                 sys.exit()
+            elif event.key == pygame.K_SPACE:
+                self._fire_bullet()
 
     def _check_keyup_events(self,event):
             if event.key == pygame.K_RIGHT:
