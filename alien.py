@@ -1,8 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
 
-
-
 def __init__(self, ai_game):
     """Initialize the alien and set its starting position."""
     super().__init__()
